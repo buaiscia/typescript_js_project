@@ -1,12 +1,12 @@
 //Project type
-enum ProjectStatus { Active, Finished}
+enum ProjectStatus { Active, Finished }
 
 class Project {
     constructor(
-        public id: string, 
-        public title: string, 
-        public description: string, 
-        public people: number, 
+        public id: string,
+        public title: string,
+        public description: string,
+        public people: number,
         public status: ProjectStatus) {
 
     }
@@ -15,10 +15,10 @@ class Project {
 
 //Project State management
 
-type Listener = (items: Project []) => void;
+type Listener = (items: Project[]) => void;
 
 class ProjectState {
-    private projects: Project [] = [];
+    private projects: Project[] = [];
     private static instance: ProjectState;
     private listeners: Listener[] = [];
     private constructor() {
@@ -26,7 +26,7 @@ class ProjectState {
     }
 
     static getInstance() {
-        if(this.instance) {
+        if (this.instance) {
             return this.instance;
         }
         this.instance = new ProjectState();
@@ -39,11 +39,11 @@ class ProjectState {
 
     addProject(title: string, description: string, numOfPeople: number) {
         const newProject = new Project(
-                Math.random().toString(),
-                title, 
-                description, 
-                numOfPeople, 
-                ProjectStatus.Active)
+            Math.random().toString(),
+            title,
+            description,
+            numOfPeople,
+            ProjectStatus.Active)
         // const newProject = {
         //     id: Math.random().toString(),
         //     title: title,
@@ -51,7 +51,7 @@ class ProjectState {
         //     people: numOfPeople
         // }
         this.projects.push(newProject);
-        for(const listenerFc of this.listeners) {
+        for (const listenerFc of this.listeners) {
             listenerFc(this.projects.slice())
         }
     }
@@ -131,33 +131,40 @@ class ProjectList {
         this.element.id = `${type}-projects`;
 
         projectState.addListener((projects: Project[]) => {
-            this.assignedProjects = projects;
+            const relevantProjects = projects.filter(prj => {
+                if (this.type === 'active') {
+                    return prj.status === ProjectStatus.Active
+                }
+                return prj.status === ProjectStatus.Finished
+            });
+            this.assignedProjects = relevantProjects;
             this.renderProjects();
-        })
+        });
 
         this.attach();
         this.renderContent();
     }
 
     private renderProjects() {
-            const listEl = document.getElementById(`${this.type}-project-list`)! as HTMLUListElement;
-            for (const prjItems of this.assignedProjects) {
-                const listItem = document.createElement('li');
-                listItem.textContent = prjItems.title;
-                listEl.appendChild(listItem)
-            }
+    const listEl = document.getElementById(`${this.type}-project-list`)! as HTMLUListElement;
+    listEl.innerHTML = '';
+    for (const prjItems of this.assignedProjects) {
+        const listItem = document.createElement('li');
+        listItem.textContent = prjItems.title;
+        listEl.appendChild(listItem)
     }
+}
 
 
     private renderContent() {
-        const listId = `${this.type}-project-list`;
-        this.element.querySelector('ul')!.id = listId;
-        this.element.querySelector('h2')!.textContent = this.type.toLocaleUpperCase() + 'PROJECTS';
-    }
+    const listId = `${this.type}-project-list`;
+    this.element.querySelector('ul')!.id = listId;
+    this.element.querySelector('h2')!.textContent = this.type.toLocaleUpperCase() + 'PROJECTS';
+}
 
     private attach() {
-        this.hostElement.insertAdjacentElement('beforeend', this.element)
-    }
+    this.hostElement.insertAdjacentElement('beforeend', this.element)
+}
 }
 
 
