@@ -4,15 +4,15 @@
 //// <reference path="../util/validation.ts" />
 //// <reference path="../state/project-state.ts" />
 
-import { Component } from "../components/base-component.js";
-import { Validatable, validate } from "../util/validation.js";
+import Compon from "../components/base-component.js";  //default export allows the exported thing to be the default one, so any name can be assigned
+import  * as Validation from "../util/validation.js";
 import { autobind } from "../decorators/autobind.js";
 import { projectState } from "../state/project-state.js";
 
 // namespace App {
     
     //Project input class
-    export class ProjectInput extends Component<HTMLDivElement, HTMLFormElement>{
+    export class ProjectInput extends Compon<HTMLDivElement, HTMLFormElement>{
 
 
         titleInputElement: HTMLInputElement;
@@ -44,16 +44,16 @@ import { projectState } from "../state/project-state.js";
             const enteredDescription = this.descriptionInputElement.value;
             const enteredPeople = this.peopleInputElement.value;
 
-            const titleValidatable: Validatable = {
+            const titleValidatable: Validation.Validatable = {
                 value: enteredTitle,
                 required: true
             }
-            const descriptionValidatable: Validatable = {
+            const descriptionValidatable: Validation.Validatable = {
                 value: enteredDescription,
                 required: true,
                 minLength: 5
             }
-            const peopleValidatable: Validatable = {
+            const peopleValidatable: Validation.Validatable = {
                 value: enteredPeople,
                 required: true,
                 min: 1,
@@ -62,9 +62,9 @@ import { projectState } from "../state/project-state.js";
 
             // if(enteredTitle.trim().length === 0 || enteredDescription.trim().length === 0 || enteredPeople.trim().length === 0) {
             if (
-                !validate(titleValidatable) ||
-                !validate(descriptionValidatable) ||
-                !validate(peopleValidatable)
+                !Validation.validate(titleValidatable) ||
+                !Validation.validate(descriptionValidatable) ||
+                !Validation.validate(peopleValidatable)
 
             ) {
                 alert('invalid input, try again');

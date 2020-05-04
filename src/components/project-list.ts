@@ -7,7 +7,7 @@
 
 import { DragTarget  } from "../models/drag-drop.js";
 import { Project, ProjectStatus  } from "../models/project.js";
-import { Component  } from "./base-component.js";
+import Compon from "../components/base-component.js";
 import { autobind  } from "../decorators/autobind.js";
 import { projectState  } from "../state/project-state.js";
 import { ProjectItem  } from "./project-item.js";
@@ -17,7 +17,7 @@ import { ProjectItem  } from "./project-item.js";
 // namespace App {
     //ProjectList class
 
-    export class ProjectList extends Component<HTMLDivElement, HTMLElement> implements DragTarget {
+    export class ProjectList extends Compon<HTMLDivElement, HTMLElement> implements DragTarget {
 
         assignedProjects: Project[];
 

@@ -6,14 +6,14 @@
 
 import { Draggable  } from "../models/drag-drop.js";
 import { Project  } from "../models/project.js";
-import { Component  } from "./base-component.js";
+import Compon from "../components/base-component.js";
 import { autobind  } from "../decorators/autobind.js";
 
 // namespace App {
     
     //ProjectItem class 
 
-    export class ProjectItem extends Component<HTMLUListElement, HTMLLIElement> implements Draggable {
+    export class ProjectItem extends Compon<HTMLUListElement, HTMLLIElement> implements Draggable {
         private project: Project;
 
 
