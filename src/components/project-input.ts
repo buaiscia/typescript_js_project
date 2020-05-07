@@ -4,10 +4,10 @@
 //// <reference path="../util/validation.ts" />
 //// <reference path="../state/project-state.ts" />
 
-import Compon from "../components/base-component.js";  //default export allows the exported thing to be the default one, so any name can be assigned
-import  * as Validation from "../util/validation.js";
-import { autobind } from "../decorators/autobind.js";
-import { projectState } from "../state/project-state.js";
+import Compon from "../components/base-component";  //default export allows the exported thing to be the default one, so any name can be assigned
+import  * as Validation from "../util/validation";
+import { autobind } from "../decorators/autobind";
+import { projectState } from "../state/project-state";
 
 // namespace App {
     

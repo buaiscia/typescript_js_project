@@ -4,10 +4,10 @@
 //// <reference path="../models/project.ts" />
 //// <reference path="../models/drag-drop.ts" />
 
-import { Draggable  } from "../models/drag-drop.js";
-import { Project  } from "../models/project.js";
-import Compon from "../components/base-component.js";
-import { autobind  } from "../decorators/autobind.js";
+import { Draggable  } from "../models/drag-drop";
+import { Project  } from "../models/project";
+import Compon from "../components/base-component";
+import { autobind  } from "../decorators/autobind";
 
 // namespace App {
     
